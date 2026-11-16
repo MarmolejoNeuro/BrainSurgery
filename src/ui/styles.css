@@ -430,3 +430,18 @@ button.ui-btn.primary:hover { background: rgba(95, 211, 198, 0.12); }
 .history tr.this td { background: rgba(95, 199, 208, 0.08); }
 .history .link { background: none; border: 0; color: var(--text-dim); font: inherit; font-size: 11px; cursor: pointer; padding: 4px 0; text-decoration: underline; }
 @media (max-width: 640px) { .start .cases { grid-template-columns: 1fr; } }
+
+/* ---------- Top bar in narrow windows: never run under the vitals panel ---------- */
+@media (max-width: 1240px) {
+  .topbar .milestone { display: none; }
+}
+@media (max-width: 1040px) {
+  /* The title is also in the browser tab; drop it before any control. */
+  .topbar .title { display: none; }
+  .topbar { gap: 10px; }
+}
+@media (max-width: 860px) {
+  .topbar { gap: 6px; padding: 4px 6px; }
+  .topbar .ui-btn { padding: 3px 6px; font-size: 11px; }
+  .topbar .readout .k { display: none; }
+}
