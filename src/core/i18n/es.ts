@@ -1,12 +1,22 @@
 import type { I18nKey } from './en';
 
 export const es: Record<I18nKey, string> = {
-  'app.title': 'Clipaje de aneurisma CI-ComP',
+  'app.title': 'Clipaje de aneurisma cerebral',
+  'start.caseTitle': 'Elige un caso',
+  'case.icpc.title': 'Aneurisma CI-ComP',
+  'case.icpc.desc': 'Aneurisma no roto de 6,6 mm en la unión carótida interna–arteria comunicante posterior derecha, con proyección posterolateral e inferior y una pequeña bleb en el domo.',
+  'case.acha.title': 'Aneurisma de la coroidea anterior',
+  'case.acha.desc': 'Aneurisma no roto de 5,2 mm en la pared posterior de la ACI derecha, justo proximal al origen de la arteria coroidea anterior. Cuello estrecho, pero la AChA sale justo en su borde distal: compruébala detrás del domo.',
+  'history.title': 'Tus intentos recientes',
+  'history.empty': 'Aún no hay casos terminados. Aquí aparecerán tu tiempo y tu pérdida de sangre.',
+  'history.best': 'Mejor',
+  'history.clear': 'Borrar historial',
+  'history.this': 'este intento',
+  'history.clean': 'clip limpio',
   'app.subtitle': 'Abordaje pterional derecho transilviano · Simulador microquirúrgico',
   'start.disclaimerTitle': 'Solo demostración educativa',
   'start.disclaimer':
     'Este simulador es solo para educación y demostración. No es entrenamiento clínico, no está validado para evaluar habilidades y no constituye consejo médico. La anatomía y la fisiología son esquemáticas y simplificadas.',
-  'start.case': 'Caso: aneurisma no roto de 6,6 mm en la unión carótida interna–arteria comunicante posterior derecha, con proyección posterolateral e inferior y una pequeña bleb en el domo.',
   'start.begin': 'Entrar al microscopio quirúrgico',
   'start.controlsTitle': 'Controles del microscopio',
   'start.ctlOrbit': 'Arrastre izquierdo o central: inclinar el microscopio',
@@ -91,6 +101,7 @@ export const es: Record<I18nKey, string> = {
   'toast.coagNerve': 'Lesión térmica de un nervio craneal.',
   'toast.coagDone': 'Coagulado.',
   'toast.domeTouch': 'Suave: estás tocando el domo.',
+  'toast.roughTear': 'Demasiado rápido: se desgarró un vaso pequeño y sangra. Los movimientos lentos disecan; los rápidos desgarran.',
   'toast.domeRough': 'Manipulación brusca del domo: más despacio.',
   'toast.suctionDome': 'Aspirador demasiado cerca del domo.',
   'toast.clipEarly': 'Clip aplicado antes de liberar el cuello.',

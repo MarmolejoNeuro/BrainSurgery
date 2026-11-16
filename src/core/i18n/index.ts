@@ -5,7 +5,15 @@ export type Lang = 'en' | 'es';
 export type { I18nKey };
 
 const dicts: Record<Lang, Record<I18nKey, string>> = { en, es };
-let lang: Lang = 'en';
+const LANG_KEY = 'icpc-sim.lang';
+/** Remembered between visits (and across a case switch, which reloads the page). */
+let lang: Lang = (() => {
+  try {
+    return localStorage.getItem(LANG_KEY) === 'es' ? 'es' : 'en';
+  } catch {
+    return 'en';
+  }
+})();
 const listeners = new Set<(l: Lang) => void>();
 
 export function t(key: I18nKey): string {
@@ -18,6 +26,11 @@ export function getLang(): Lang {
 
 export function setLang(l: Lang): void {
   lang = l;
+  try {
+    localStorage.setItem(LANG_KEY, l);
+  } catch {
+    /* storage blocked */
+  }
   document.documentElement.lang = l;
   applyDom();
   listeners.forEach((fn) => fn(l));

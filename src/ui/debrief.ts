@@ -1,6 +1,9 @@
 import { t, type I18nKey } from '../core/i18n';
 import type { Debrief } from '../procedure/scoring';
+import { recordRun } from '../procedure/history';
+import { CASES, CURRENT_CASE } from '../config/cases';
 import { h } from './dom';
+import { historyTable } from './historyTable';
 
 const fmt = (s: number) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
 
@@ -55,7 +58,7 @@ export class DebriefScreen {
       'div.card.panel',
       {},
       h('h1', {}, t('debrief.title')),
-      h('div.sub', {}, t('app.subtitle')),
+      h('div.sub', {}, `${t(CASES[CURRENT_CASE].title)} · ${t('app.subtitle')}`),
       h(
         'div.stats',
         {},
@@ -74,6 +77,9 @@ export class DebriefScreen {
         {},
         ...d.tips.map((tip) => h('li', {}, t(tip.key).replace('{v}', tip.value ?? ''))),
       ),
+      h('h3', {}, t('history.title')),
+      // Runs abandoned before finishing step 1 are not recorded.
+      historyTable(d.stagesDone > 0 ? recordRun(d) : undefined),
       h('div.disclaimer-small', {}, t('start.disclaimer')),
       h(
         'div.row',

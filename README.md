@@ -1,6 +1,6 @@
-# IC-PC Aneurysm Clipping Simulator
+# Cerebral Aneurysm Clipping Simulator
 
-Browser-based educational simulator of microsurgical clipping of a right internal carotid–posterior communicating artery (IC-PC) aneurysm through a pterional, transsylvian approach, seen through a simulated operating microscope.
+Browser-based educational simulator of microsurgical aneurysm clipping through a right pterional, transsylvian approach, seen through a simulated operating microscope. Two cases: an internal carotid–posterior communicating artery (IC-PC) aneurysm and an anterior choroidal (IC-AChA) aneurysm.
 
 > **Educational demonstration only.** Not clinical training, not validated for skill assessment, not medical advice. Anatomy and physiology are schematic and simplified.
 
@@ -41,11 +41,35 @@ Clip (6): Q/E rotate · R/F tilt · Shift+R/F sideways · wheel blade depth · S
 
 Clip findings (neck closure, residual neck, ICA narrowing, PCom/AChA patency) are revealed only by those checks. "End case" opens the debrief at any time.
 
+Handle tissue gently: pressing on the dome raises a hidden rupture risk, and fast dissector strokes tear small vessels and start an ooze (stop it with the bipolar). Blood loss lowers blood pressure and raises heart rate.
+
+## Cases and run history
+
+Pick a case on the start screen (it is kept in the URL, e.g. `?case=acha`, so "Restart case" reloads the same one):
+
+- **IC-PC aneurysm**: 6.6 mm, posterolateral and inferior, with a bleb.
+- **Anterior choroidal aneurysm**: 5.2 mm, narrow neck, with the AChA leaving right at the distal neck.
+
+Each case is a short list of overrides in `src/config/cases.ts` on top of `src/config/anatomy.ts`, so a new location needs no rendering code: add an entry there and its title and description in `src/core/i18n/en.ts` and `es.ts`.
+
+Finished runs (time, blood loss, clip result) are saved in the browser's localStorage and shown on the start screen and in the debrief, with your best clean run marked. Nothing leaves your computer. The language choice is remembered too.
+
+## Deploy (Vercel)
+
+It is a static Vite site, so no configuration is needed:
+
+1. Push this repository to GitHub.
+2. On vercel.com, choose "Add New → Project" and import the repository.
+3. Keep the detected settings (framework Vite, build `npm run build`, output `dist`) and deploy.
+
+Every later push to the main branch redeploys automatically.
+
 ## Where to tune
 
 | File | What |
 |---|---|
 | `src/config/anatomy.ts` | All anatomy: sizes, positions, colors, vessel splines, aneurysm, nerves, arachnoid, adhesions, spatulas (1 unit = 1 mm) |
+| `src/config/cases.ts` | The cases: per-case changes to the anatomy (aneurysm position, size, projection, nearby branches) |
 | `src/config/sim.ts` | Microscope, rendering, physiology, bleeding, neck clearance threshold |
 
 ## Code layout

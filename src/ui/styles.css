@@ -408,3 +408,25 @@ button.ui-btn.primary:hover { background: rgba(95, 211, 198, 0.12); }
   .debrief .stats { grid-template-columns: repeat(2, 1fr); }
   .debrief .cliprows { grid-template-columns: 1fr; }
 }
+
+/* ---------- Case picker and run history ---------- */
+.start .card { max-height: calc(100vh - 32px); overflow-y: auto; }
+.start .cases { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+.case-card {
+  text-align: left; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--panel-border);
+  color: #b9c6ca; padding: 10px 12px; cursor: pointer; font: inherit; font-size: 12px; line-height: 1.45;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.case-card b { color: #e7eef0; font-weight: 600; font-size: 13px; }
+.case-card:hover { border-color: rgba(120, 200, 210, 0.5); }
+.case-card.selected { border-color: var(--accent, #5fc7d0); background: rgba(95, 199, 208, 0.08); }
+.history .empty { color: var(--text-dim); font-size: 12px; margin-top: 4px; }
+.history table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 4px; }
+.history td { padding: 4px 6px; border-bottom: 1px solid rgba(255, 255, 255, 0.06); color: #c4d0d4; }
+.history td.res.complete { color: #8fe0a0; }
+.history td.res.bad { color: #ff8a8a; }
+.history td.res.incomplete, .history td.res.none { color: #e8c170; }
+.history td.tag { color: var(--text-dim); text-align: right; }
+.history tr.this td { background: rgba(95, 199, 208, 0.08); }
+.history .link { background: none; border: 0; color: var(--text-dim); font: inherit; font-size: 11px; cursor: pointer; padding: 4px 0; text-decoration: underline; }
+@media (max-width: 640px) { .start .cases { grid-template-columns: 1fr; } }

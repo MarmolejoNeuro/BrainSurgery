@@ -1,3 +1,4 @@
+import './config/cases'; // must come first: applies the selected case to ANATOMY before anything is built
 import './ui/styles.css';
 import * as THREE from 'three';
 import { Anatomy } from './anatomy';
