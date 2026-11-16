@@ -6,12 +6,15 @@ export type { I18nKey };
 
 const dicts: Record<Lang, Record<I18nKey, string>> = { en, es };
 const LANG_KEY = 'icpc-sim.lang';
-/** Remembered between visits (and across a case switch, which reloads the page). */
+/**
+ * Spanish by default; English only if the visitor chose it before.
+ * Remembered between visits (and across a case switch, which reloads the page).
+ */
 let lang: Lang = (() => {
   try {
-    return localStorage.getItem(LANG_KEY) === 'es' ? 'es' : 'en';
+    return localStorage.getItem(LANG_KEY) === 'en' ? 'en' : 'es';
   } catch {
-    return 'en';
+    return 'es';
   }
 })();
 const listeners = new Set<(l: Lang) => void>();

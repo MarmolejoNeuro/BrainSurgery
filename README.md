@@ -54,7 +54,7 @@ Pick a case on the start screen (it is kept in the URL, e.g. `?case=acha`, so "R
 
 Each case is a short list of overrides in `src/config/cases.ts` on top of `src/config/anatomy.ts`, so a new location needs no rendering code: add an entry there and its title and description in `src/core/i18n/en.ts` and `es.ts`.
 
-Finished runs (time, blood loss, clip result) are saved in the browser's localStorage and shown on the start screen and in the debrief, with your best clean run marked. Nothing leaves your computer. The language choice is remembered too.
+Finished runs (time, blood loss, clip result) are saved in the browser's localStorage and shown on the start screen and in the debrief, with your best clean run marked. Nothing leaves your computer. The app starts in Spanish; switching to English on the start screen is remembered too.
 
 ## Deploy (Vercel)
 
