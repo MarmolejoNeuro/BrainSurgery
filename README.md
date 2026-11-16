@@ -2,6 +2,8 @@
 
 Browser-based educational simulator of microsurgical aneurysm clipping through a right pterional, transsylvian approach, seen through a simulated operating microscope. Two cases: an internal carotid–posterior communicating artery (IC-PC) aneurysm and an anterior choroidal (IC-AChA) aneurysm.
 
+**Español:** Prueba este simulador de neurocirugía. Es un caso simulado de un clipaje de aneurisma en la arteria carótida interna comunicante posterior derecha y otro caso de un aneurisma de la arteria coroidea anterior.
+
 > **Educational demonstration only.** Not clinical training, not validated for skill assessment, not medical advice. Anatomy and physiology are schematic and simplified.
 
 ## Run
