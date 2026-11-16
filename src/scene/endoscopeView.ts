@@ -9,6 +9,7 @@ export class EndoscopeView {
   readonly camera = new THREE.PerspectiveCamera(70, 4 / 3, 0.3, 200);
   private light = new THREE.PointLight('#fff4e8', 0, 0, 0);
   private frame: HTMLElement;
+  /** Screen placement in CSS px (x from the left, bottom from the bottom edge); see layout(). */
   readonly rect = { x: 16, bottom: 104, w: 300, h: 225 };
 
   constructor(scene: THREE.Scene, parent: HTMLElement) {
@@ -16,12 +17,6 @@ export class EndoscopeView {
     scene.add(this.camera);
     this.frame = document.createElement('div');
     this.frame.className = 'pip-frame';
-    Object.assign(this.frame.style, {
-      left: `${this.rect.x}px`,
-      bottom: `${this.rect.bottom}px`,
-      width: `${this.rect.w}px`,
-      height: `${this.rect.h}px`,
-    });
     this.frame.innerHTML = '<span class="pip-label mono">ENDO 30°</span>';
     this.frame.style.display = 'none';
     parent.append(this.frame);
@@ -59,9 +54,32 @@ export class EndoscopeView {
     this.camera.updateMatrixWorld();
   }
 
+  /**
+   * Places the picture-in-picture in free space: just right of the left panel
+   * column (procedure checklist and clip check, whose height varies) and above
+   * the instrument bar and its hint line, so it never covers either.
+   */
+  private layout(): void {
+    const r = this.rect;
+    const small = window.innerWidth < 1100;
+    r.w = small ? 240 : 300;
+    r.h = small ? 180 : 225;
+    const left = document.querySelector('.left-col');
+    r.x = Math.round(left ? left.getBoundingClientRect().right + 12 : 16);
+    let top = window.innerHeight;
+    for (const el of document.querySelectorAll<HTMLElement>('.toolbar, .tool-hint')) {
+      const b = el.getBoundingClientRect();
+      if (!b.width || !b.height || getComputedStyle(el).display === 'none') continue;
+      if (b.left < r.x + r.w && b.right > r.x) top = Math.min(top, b.top);
+    }
+    r.bottom = Math.max(16, Math.round(window.innerHeight - top + 10));
+    Object.assign(this.frame.style, { left: `${r.x}px`, bottom: `${r.bottom}px`, width: `${r.w}px`, height: `${r.h}px` });
+  }
+
   render(renderer: THREE.WebGLRenderer, scene: THREE.Scene, visible: boolean): void {
     this.frame.style.display = visible ? '' : 'none';
     if (!visible) return;
+    this.layout();
     const { x, bottom, w, h } = this.rect;
     const prevAuto = renderer.autoClear;
     renderer.setRenderTarget(null);
